@@ -1,15 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import subprocess
 import sys
 from argparse import *
 import re
 from termcolor import cprint, colored
-
-
-# 40:16:7e:6d:c9:7b - eth0
-# 00:50:56:c0:00:01 -vmnet1
-
 
 def get_arg():
     parser = ArgumentParser()
@@ -40,12 +35,6 @@ def get_interface():
 
 
 def mac_changer(interface, new_mac):
-    # subprocess.call("ifconfig " + interface + " down", shell=True)
-    # subprocess.call("ifconfig " + interface + " hw ether " + new_mac, shell=True)
-    # subprocess.call("ifconfig " + interface + " up", shell=True)
-    # subprocess.call(["ifconfig", interface, "down"])
-    # subprocess.call(["ifconfig", interface, "hw", "ether", new_mac])
-    # subprocess.call(["ifconfig", interface, "up"])
     subprocess.call(["ip", "link", "set", interface, "down"])
     subprocess.call(["ip", "link", "set", interface, "address", new_mac])
     subprocess.call(["ip", "link", "set", interface, "up"])
